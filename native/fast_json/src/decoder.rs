@@ -1,4 +1,3 @@
-use std::error::Error;
 use super::parser;
 use rustler::{NifDecoder, NifEncoder, NifEnv, NifTerm, NifResult};
 use rustler::tuple::make_tuple;

@@ -1,9 +1,10 @@
 use rustler::{NifDecoder, NifEncoder, NifEnv, NifTerm, NifResult, NifError};
-use rustler::types::atom::{NifAtom, get_atom};
+use rustler::types::atom::NifAtom;
 use rustler::types::list::NifListIterator;
 use rustler::types::map::NifMapIterator;
 use json;
 use json::JsonValue;
+use atoms;
 use super::util::ok;
 
 pub fn encode<'a>(env: NifEnv<'a>, args: &Vec<NifTerm<'a>>) -> NifResult<NifTerm<'a>> {
@@ -64,11 +65,11 @@ fn handle_binary<'a>(_env: NifEnv<'a>, string: &str) -> NifResult<JsonValue> {
 }
 
 fn handle_atom<'a>(_env: NifEnv<'a>, atom: NifAtom) -> NifResult<JsonValue> {
-    if atom == get_atom("true").unwrap() {
+    if atom == atoms::true_atom() {
         Ok(JsonValue::Boolean(true))
-    } else if atom == get_atom("false").unwrap() {
+    } else if atom == atoms::false_atom() {
         Ok(JsonValue::Boolean(false))
-    } else if atom == get_atom("nil").unwrap() {
+    } else if atom == atoms::nil() {
         Ok(JsonValue::Null)
     } else {
         Ok(JsonValue::String("nope".to_string()))

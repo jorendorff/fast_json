@@ -2,12 +2,13 @@
 #[macro_use]
 extern crate rustler;
 #[macro_use]
+extern crate lazy_static;
+#[macro_use]
 extern crate error_chain;
 extern crate json;
 
 use rustler::{NifEnv, NifTerm};
 use rustler::schedule::NifScheduleFlags::*;
-use rustler::types::atom::init_atom;
 
 mod decoder;
 mod encoder;
@@ -29,12 +30,18 @@ rustler_export_nifs! {
     Some(load)
 }
 
+mod atoms {
+    rustler_atoms! {
+        atom nil;
+        atom ok;
+        atom error;
+        atom more;
+        atom true_atom = "true";
+        atom false_atom = "false";
+    }
+}
+
 fn load(env: NifEnv, _info: NifTerm) -> bool {
     resource_struct_init!(ParserResource, env);
-
-    init_atom("ok");
-    init_atom("error");
-    init_atom("more");
-
     true
 }

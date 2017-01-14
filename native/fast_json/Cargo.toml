@@ -19,6 +19,7 @@ rustler_codegen = { git = "https://github.com/hansihe/Rustler" }
 
 [dependencies]
 error-chain = "0.7.2"
+lazy_static = "0.2.2"
 rustler = { git = "https://github.com/hansihe/Rustler" }
 rustler_codegen = { git = "https://github.com/hansihe/Rustler" }
 #rustler = { path = "/Users/scrogson/Forks/Rustler" }
